@@ -39,3 +39,9 @@ library(maptools)
 map <- get_map(location = 'Taiwan', zoom = 8)
 ggmap(map) + geom_point(data = dt_dist, aes(x = X, y = Y, size = gen))
 sixcity.shp <- readShapeSpatial("data/sixcity.shp")
+
+sixcity_cord <- fread("data/105_sixcity_all_cord.csv")
+summary(sixcity_cord)
+sixcity_mth <- dcast(sixcity_cord, city + area + code1 ~ Ym, value.var = "gen")
+
+ggplot(sixcity_mth) + 
